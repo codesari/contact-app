@@ -14,7 +14,17 @@ import {
 import { AccountCircle } from "@mui/icons-material";
 import PhoneEnabledIcon from "@mui/icons-material/PhoneEnabled";
 
-const FormComponent = () => {
+const FormComponent = ({ user, setUser, handleSubmit }) => {
+  const handleChange = (e) => {
+    e.preventDefault();
+    // const name=e.target.name;
+    // const value=e.target.value;
+    const { name, value } = e.target;
+    console.log(name, value);
+    setUser({ ...user, [name]: value });
+    //? user state i bir obje.objeyi açıp key:value seklinde deger yazdirdim
+    console.log(user);
+  };
   return (
     <Grid
       textAlign="center"
@@ -38,13 +48,13 @@ const FormComponent = () => {
       <h2 className="contact-header">Add Contact</h2>
 
       <Box style={{ backgroundColor: "white", padding: "20px" }}>
-        <form>
+        <form onSubmit={handleSubmit}>
           <Stack spacing={3} direction="column">
             <TextField
               variant="outlined"
               name="username"
-              value={null}
-              onChange={null}
+              value={user.username}
+              onChange={handleChange}
               placeholder="Name"
               InputProps={{
                 startAdornment: (
@@ -56,9 +66,9 @@ const FormComponent = () => {
             />
             <TextField
               variant="outlined"
-              name="phoneNumber"
-              value={null}
-              onChange={null}
+              name="phone"
+              value={user.phone}
+              onChange={handleChange}
               placeholder="Phone Number"
               InputProps={{
                 startAdornment: (
@@ -74,8 +84,8 @@ const FormComponent = () => {
                 label="Gender"
                 name="gender"
                 variant="outlined"
-                value={null}
-                onChange={null}
+                value={user.gender}
+                onChange={handleChange}
               >
                 <MenuItem value="Female">Female</MenuItem>
                 <MenuItem value="Male">Male</MenuItem>
@@ -96,3 +106,4 @@ export default FormComponent;
 
 //* MUI de input'un karsiligi : TextField
 //? startAdornment -endAdornment input'un içinde ikon yerleştirme başa veya sona
+//* inputlar in value property lerine state i koyuyoruz.İlk başta kullanici bilgisi girilmediği için boş sonrasinda girilen değer kendi value si olmuş olacak.
