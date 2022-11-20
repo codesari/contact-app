@@ -9,9 +9,12 @@ import {
   Paper,
 } from "@mui/material";
 
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+
 //?custom hook'u import ediyoruz
-import { useFetch } from "../../utils/functions";
-const Contacts = () => {
+import { deleteUser, useFetch } from "../../utils/functions";
+const Contacts = ({ editUser }) => {
   //* custom hook'u kullanırken return degerlerini suslu icine yazip kullaniyoruz
   const { isLoading, contact } = useFetch();
 
@@ -56,8 +59,15 @@ const Contacts = () => {
                     <TableCell align="center">{username}</TableCell>
                     <TableCell align="center">{phone}</TableCell>
                     <TableCell align="center">{gender}</TableCell>
-                    <TableCell align="center">{null}</TableCell>
-                    <TableCell align="center">{null}</TableCell>
+                    <TableCell align="center" onClick={() => deleteUser(id)}>
+                      {<DeleteIcon />}
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      onClick={() => editUser(id, username, phone, gender)}
+                    >
+                      {<EditIcon />}
+                    </TableCell>
                   </TableRow>
                 );
               })

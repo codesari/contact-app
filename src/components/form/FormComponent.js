@@ -14,7 +14,7 @@ import {
 import { AccountCircle } from "@mui/icons-material";
 import PhoneEnabledIcon from "@mui/icons-material/PhoneEnabled";
 
-const FormComponent = ({ user, setUser, handleSubmit }) => {
+const FormComponent = ({ user, setUser, handleSubmit, btnName }) => {
   const handleChange = (e) => {
     e.preventDefault();
     // const name=e.target.name;
@@ -93,7 +93,7 @@ const FormComponent = ({ user, setUser, handleSubmit }) => {
               </Select>
             </FormControl>
             <Button variant="contained" type="submit" value="Submit">
-              ADD
+              {btnName}
             </Button>
           </Stack>
         </form>

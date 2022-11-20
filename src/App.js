@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import Contacts from "./components/contacts/Contacts";
 import FormComponent from "./components/form/FormComponent";
-import { writeUserData } from "./utils/functions";
+import { updateUser, writeUserData } from "./utils/functions";
 
 function App() {
   const initial = {
@@ -11,20 +11,35 @@ function App() {
     gender: "",
   };
   const [user, setUser] = useState(initial);
+  const [btnName, setBtnName] = useState("ADD");
   //* user state i obje de alabilir.FormComponent'de girilen form bilgilerini obje formatinda tek bir state olan user'a atacagiz.
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    writeUserData(user);
+    if (user.id) {
+      //? user.id varsa bu islem güncelleme islemidir.
+      updateUser(user);
+    } else {
+      //? id yoksa bu bir yeni kayit işlemidir.
+      writeUserData(user);
+    }
+    setUser(initial);
+    setBtnName("ADD");
   };
+  const editUser = (id, username, phone, gender) => {
+    setBtnName("UPDATE");
+    setUser({ id, username, phone, gender });
+  };
+
   return (
     <div className="App">
       <FormComponent
         user={user}
         setUser={setUser}
         handleSubmit={handleSubmit}
+        btnName={btnName}
       />
-      <Contacts />
+      <Contacts editUser={editUser} />
     </div>
   );
 }

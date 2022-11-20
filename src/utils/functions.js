@@ -11,7 +11,15 @@
 //? yukaridaki yapiyi fonksiyonel hale getirdik.
 
 //* CRUD --> C
-import { getDatabase, push, ref, set, onValue } from "firebase/database";
+import {
+  getDatabase,
+  push,
+  ref,
+  set,
+  onValue,
+  remove,
+  update,
+} from "firebase/database";
 import { useEffect, useState } from "react";
 import startFirebase from "./firebase";
 
@@ -50,4 +58,19 @@ export const useFetch = () => {
     });
   }, []);
   return { isLoading, contact };
+};
+
+export const deleteUser = (id) => {
+  const db = getDatabase(startFirebase);
+
+  remove(ref(db, "users/" + id));
+};
+
+export const updateUser = (user) => {
+  const db = getDatabase(startFirebase);
+  const userRef = ref(db, "users/");
+
+  const updates = {};
+  updates["/users/" + user.id] = user;
+  return update(ref(db), updates);
 };
