@@ -48,6 +48,6 @@ export const useFetch = () => {
       setContact(userArray);
       setIsLoading(false);
     });
-    return { isLoading, contact };
   }, []);
+  return { isLoading, contact };
 };
