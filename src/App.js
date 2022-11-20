@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ToastContainer } from "react-toastify";
 import "./App.css";
 import Contacts from "./components/contacts/Contacts";
 import FormComponent from "./components/form/FormComponent";
@@ -40,6 +41,7 @@ function App() {
         btnName={btnName}
       />
       <Contacts editUser={editUser} />
+      <ToastContainer />
     </div>
   );
 }
